@@ -14,6 +14,7 @@
 		8022DB2C23EB0D430094908B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8022DB2B23EB0D430094908B /* Preview Assets.xcassets */; };
 		8022DB2F23EB0D430094908B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8022DB2D23EB0D430094908B /* LaunchScreen.storyboard */; };
 		8022DB3A23EB22260094908B /* CRUDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8022DB3923EB22260094908B /* CRUDList.swift */; };
+		8022DB3C23EB263E0094908B /* CRUDForEach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8022DB3B23EB263E0094908B /* CRUDForEach.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8022DB2E23EB0D430094908B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8022DB3023EB0D430094908B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8022DB3923EB22260094908B /* CRUDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDList.swift; sourceTree = "<group>"; };
+		8022DB3B23EB263E0094908B /* CRUDForEach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDForEach.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				8022DB2423EB0D420094908B /* SceneDelegate.swift */,
 				8022DB2623EB0D420094908B /* ContentView.swift */,
 				8022DB3923EB22260094908B /* CRUDList.swift */,
+				8022DB3B23EB263E0094908B /* CRUDForEach.swift */,
 				8022DB3623EB0D640094908B /* SupportingFiles */,
 				8022DB2A23EB0D430094908B /* Preview Content */,
 			);
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8022DB2323EB0D420094908B /* AppDelegate.swift in Sources */,
+				8022DB3C23EB263E0094908B /* CRUDForEach.swift in Sources */,
 				8022DB2523EB0D420094908B /* SceneDelegate.swift in Sources */,
 				8022DB2723EB0D420094908B /* ContentView.swift in Sources */,
 				8022DB3A23EB22260094908B /* CRUDList.swift in Sources */,

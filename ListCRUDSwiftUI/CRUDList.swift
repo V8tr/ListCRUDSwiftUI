@@ -11,6 +11,8 @@ import SwiftUI
 struct Item: Identifiable, Hashable {
     let id: Int
     let title: String
+    
+    static func samples() -> [Item] { (0..<3).map { Item(id: $0, title: "Item #\($0)") } }
 }
 
 struct CRUDList: View {
@@ -18,6 +20,8 @@ struct CRUDList: View {
     @State var selection: Set<Item.ID> = []
     @State var editMode: EditMode = .inactive
     private static var count = 0
+    
+    let x = EditButton()
     
     var body: some View {
         NavigationView {
