@@ -8,71 +8,14 @@
 
 import SwiftUI
 
-struct Item: Identifiable, Hashable {
-    let id: Int
-    let title: String
-    
-    static func samples() -> [Item] { (0..<3).map { Item(id: $0, title: "Item #\($0)") } }
-}
-
 struct ContentView: View {
-    @State var items: [Item]
-    @State var selection: Set<Item.ID> = []
-    @State var editMode: EditMode = .inactive
-    
-    init(items: [Item]) {
-        _items = State(initialValue: items)
-    }
-    
     var body: some View {
-        NavigationView {
-            List(items, selection: $selection) { item in
-                Text(item.title)
-            }
-            .navigationBarTitle(Text("CRUD List"))
-            .navigationBarItems(leading: editOrDoneButton, trailing: addOrDeleteButton)
-            .environment(\.editMode, $editMode)
-        }
-    }
-    
-    private var editOrDoneButton: some View {
-        switch editMode {
-        case .inactive:
-            return Button(action: onEdit) { Text("Edit") }
-        default:
-            return Button(action: onDone) { Text("Done") }
-        }
-    }
-    
-    private var addOrDeleteButton: some View {
-        switch editMode {
-        case .inactive:
-            return Button(action: onAdd) { Image(systemName: "plus") }
-        default:
-            return Button(action: onDelete) { Image(systemName: "trash") }
-        }
-    }
-    
-    private func onEdit() {
-        editMode = .active
-    }
-    
-    private func onDone() {
-        editMode = .inactive
-    }
-    
-    private func onAdd() {
-        items.append(Item(id: items.count, title: "Item #\(items.count)"))
-    }
-    
-    private func onDelete() {
-        items.removeAll { item in selection.contains { $0 == item.id } }
-        selection = []
+        CRUDList()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(items: [])
+        ContentView()
     }
 }
