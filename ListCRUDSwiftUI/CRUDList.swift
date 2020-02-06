@@ -9,16 +9,14 @@
 import SwiftUI
 
 struct Item: Identifiable, Hashable {
-    let id: Int
+    let id = UUID()
     let title: String
-    
-    static func samples() -> [Item] { (0..<3).map { Item(id: $0, title: "Item #\($0)") } }
 }
 
 struct CRUDList: View {
-    @State var items: [Item] = []
-    @State var selection: Set<Item.ID> = []
-    @State var editMode: EditMode = .inactive
+    @State private var items: [Item] = []
+    @State private var selection: Set<Item.ID> = []
+    @State private var editMode: EditMode = .inactive
     private static var count = 0
     
     let x = EditButton()
@@ -61,7 +59,7 @@ struct CRUDList: View {
     }
     
     private func onAdd() {
-        items.append(Item(id: Self.count, title: "Item #\(Self.count)"))
+        items.append(Item(title: "Item #\(Self.count)"))
         Self.count += 1
     }
     
