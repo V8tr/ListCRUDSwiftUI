@@ -1,5 +1,5 @@
 //
-//  CRUDList.swift
+//  DemoList.swift
 //  ListCRUDSwiftUI
 //
 //  Created by Vadym Bulavin on 2/5/20.
@@ -8,25 +8,18 @@
 
 import SwiftUI
 
-struct Item: Identifiable, Hashable {
-    let id = UUID()
-    let title: String
-}
-
-struct CRUDList: View {
+struct DemoList: View {
     @State private var items: [Item] = []
     @State private var selection: Set<Item.ID> = []
-    @State private var editMode: EditMode = .inactive
+    @State private var editMode = EditMode.inactive
     private static var count = 0
-    
-    let x = EditButton()
     
     var body: some View {
         NavigationView {
             List(items, selection: $selection) { item in
                 Text(item.title)
             }
-            .navigationBarTitle(Text("CRUD List"))
+            .navigationBarTitle(Text("Items List"))
             .navigationBarItems(leading: editOrDoneButton, trailing: addOrDeleteButton)
             .environment(\.editMode, $editMode)
         }

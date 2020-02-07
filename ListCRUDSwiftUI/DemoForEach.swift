@@ -1,5 +1,5 @@
 //
-//  CRUDForEach.swift
+//  DemoForEach.swift
 //  ListCRUDSwiftUI
 //
 //  Created by Vadym Bulavin on 2/5/20.
@@ -9,22 +9,22 @@
 import SwiftUI
 import MobileCoreServices
 
-struct CRUDForEach: View {
-    @State private var items: [Item] = [Item(title: "Item #0"), Item(title: "Item #1")]
+struct DemoForEach: View {
+    @State private var items: [Item] = []
     @State private var editMode: EditMode = .inactive
-    static var count = 2
+    static var count = 0
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
-                    ItemView(item: item)
+                    Text(item.title)
                 }
                 .onDelete(perform: onDelete)
                 .onMove(perform: onMove)
                 .onInsert(of: [String(kUTTypeURL)], perform: onInsert)
             }
-            .navigationBarTitle("CRUD ForEach")
+            .navigationBarTitle("Items List")
             .navigationBarItems(leading: EditButton(), trailing: addButton)
             .environment(\.editMode, $editMode)
         }
@@ -43,8 +43,8 @@ struct CRUDForEach: View {
         items.remove(atOffsets: offsets)
     }
     
-    private func onMove(src: IndexSet, dst: Int) {
-        items.move(fromOffsets: src, toOffset: dst)
+    private func onMove(source: IndexSet, destination: Int) {
+        items.move(fromOffsets: source, toOffset: destination)
     }
     
     private func onInsert(at offset: Int, itemProvider: [NSItemProvider]) {
@@ -60,17 +60,5 @@ struct CRUDForEach: View {
     private func onAdd() {
         items.append(Item(title: "Item #\(Self.count)"))
         Self.count += 1
-    }
-}
-
-struct ItemView: View {
-    let item: Item
-    
-    var body: some View {
-        HStack {
-            Text(item.title)
-            Spacer()
-        }
-        .contentShape(Rectangle())
     }
 }
