@@ -13,7 +13,7 @@ struct DemoForEach: View {
     @State private var items: [Item] = []
     @State private var editMode: EditMode = .inactive
     static var count = 0
-    
+
     var body: some View {
         NavigationView {
             List {
