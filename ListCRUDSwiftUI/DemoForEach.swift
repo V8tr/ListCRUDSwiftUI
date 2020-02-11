@@ -11,8 +11,8 @@ import MobileCoreServices
 
 struct DemoForEach: View {
     @State private var items: [Item] = []
-    @State private var editMode: EditMode = .inactive
-    static var count = 0
+    @State private var editMode = EditMode.inactive
+    private static var count = 0
 
     var body: some View {
         NavigationView {
@@ -24,7 +24,7 @@ struct DemoForEach: View {
                 .onMove(perform: onMove)
                 .onInsert(of: [String(kUTTypeURL)], perform: onInsert)
             }
-            .navigationBarTitle("Items List")
+            .navigationBarTitle("List")
             .navigationBarItems(leading: EditButton(), trailing: addButton)
             .environment(\.editMode, $editMode)
         }
