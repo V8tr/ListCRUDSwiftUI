@@ -10,9 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-//        Step3.DemoList()
-//        DemoList()
-        DemoForEach()
+        DemoList()
     }
 }
 

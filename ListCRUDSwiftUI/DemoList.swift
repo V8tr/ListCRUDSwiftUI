@@ -7,57 +7,65 @@
 //
 
 import SwiftUI
+import MobileCoreServices
+
+struct Item: Identifiable {
+    let id = UUID()
+    let title: String
+}
 
 struct DemoList: View {
     @State private var items: [Item] = []
-    @State private var selection: Set<Item.ID> = []
     @State private var editMode = EditMode.inactive
     private static var count = 0
-    
+
     var body: some View {
         NavigationView {
-            List(items, selection: $selection) { item in
-                Text(item.title)
+            List {
+                ForEach(items) { item in
+                    Text(item.title)
+                }
+                .onDelete(perform: onDelete)
+                .onMove(perform: onMove)
+                .onInsert(of: [String(kUTTypeURL)], perform: onInsert)
             }
-            .navigationBarTitle(Text("Items List"))
-            .navigationBarItems(leading: editOrDoneButton, trailing: addOrDeleteButton)
+            .navigationBarTitle("List")
+            .navigationBarItems(leading: EditButton(), trailing: addButton)
             .environment(\.editMode, $editMode)
         }
     }
     
-    private var editOrDoneButton: some View {
+    private var addButton: some View {
         switch editMode {
         case .inactive:
-            return Button(action: onEdit) { Text("Edit") }
+            return AnyView(Button(action: onAdd) { Image(systemName: "plus") })
         default:
-            return Button(action: onDone) { Text("Done") }
+            return AnyView(EmptyView())
         }
     }
     
-    private var addOrDeleteButton: some View {
-        switch editMode {
-        case .inactive:
-            return Button(action: onAdd) { Image(systemName: "plus") }
-        default:
-            return Button(action: onDelete) { Image(systemName: "trash") }
+    private func onDelete(offsets: IndexSet) {
+        items.remove(atOffsets: offsets)
+    }
+    
+    private func onMove(source: IndexSet, destination: Int) {
+        items.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    private func onInsert(at offset: Int, itemProvider: [NSItemProvider]) {
+        for provider in itemProvider {
+            if provider.canLoadObject(ofClass: URL.self) {
+                _ = provider.loadObject(ofClass: URL.self) { url, error in
+                    DispatchQueue.main.async {
+                        url.map { self.items.insert(Item(title: $0.absoluteString), at: offset) }
+                    }
+                }
+            }
         }
-    }
-    
-    private func onEdit() {
-        editMode = .active
-    }
-    
-    private func onDone() {
-        editMode = .inactive
     }
     
     private func onAdd() {
         items.append(Item(title: "Item #\(Self.count)"))
         Self.count += 1
-    }
-    
-    private func onDelete() {
-        items.removeAll { item in selection.contains { $0 == item.id } }
-        selection = []
     }
 }
